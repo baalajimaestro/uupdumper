@@ -1,0 +1,12 @@
+language: minimal
+
+dist: bionic
+
+services:
+  - docker
+
+before_install:
+  - docker build . -t ci
+
+script:
+  - docker run -e GH_PERSONAL_TOKEN="${GH_PERSONAL_TOKEN}" ci
