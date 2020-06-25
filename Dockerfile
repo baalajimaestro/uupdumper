@@ -1,7 +1,7 @@
-FROM alpine:edge
+FROM debian:bullseye-slim
 
-RUN apk update
-RUN apk add git python3 moreutils openssh openssl ca-certificates --no-cache
+RUN apt update
+RUN apt install git python3 moreutils openssh-client openssh-server python3-pip aria2 cabextract wimtools chntpw genisoimage grep bash openssl ca-certificates -y
 RUN pip3 install requests bs4 urllib3
 RUN git config --global user.name baalajimaestro
 RUN git config --global user.email baalajimaestro@pixelexperience.org
