@@ -8,7 +8,7 @@ ssh_keys() {
   echo "SSH Keys Set!"
 }
 
-for edition in x64,x86,arm64; do
+for edition in x64 x86 arm64; do
 echo "I am dumping $edition edition!"
 cd /app
 python3 uupdump.py $edition
