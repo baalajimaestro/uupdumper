@@ -1,12 +1,10 @@
 #! /usr/bin/env bash
 
-ssh_keys() {
-  echo "**MaestroCI UUP Dumper**"
-  mkdir -p /root/.ssh
-  curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.ssh/id_ed25519 https://raw.githubusercontent.com/baalajimaestro/keys/master/id_ed25519
-  chmod 600 ~/.ssh/id_ed25519
-  echo "SSH Keys Set!"
-}
+echo "**MaestroCI UUP Dumper**"
+mkdir -p /root/.ssh
+curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.ssh/id_ed25519 https://raw.githubusercontent.com/baalajimaestro/keys/master/id_ed25519
+chmod 600 ~/.ssh/id_ed25519
+echo "SSH Keys Set!"
 
 while true; do echo "Building Windows ISO....."; sleep 120; done &
 for edition in x64 x86 arm64; do
@@ -19,8 +17,6 @@ if [ "$RESULT" -eq 0 ]; then
     cd windows
     bash aria2_download_linux.sh
     RESULT2=$?
-    jobs
-    kill %1
     if [ "$RESULT2" -eq 0 ]; then
           scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r *.ISO baalaji20@storage.osdn.net:/storage/groups/b/ba/baalajimaestrobuilds/windows/$edition
           cd ..
@@ -28,8 +24,10 @@ if [ "$RESULT" -eq 0 ]; then
           git add .
           git commit -m "[MaestroCI]: UUP Dumped on $(date +"%m-%d-%y")" --signoff
           git remote rm origin
-          git remote add origin git@github.com:baalajimaestro/uupdumper
+          git remote add origin https://baalajimaestro:${GH_PERSONAL_TOKEN}@github.com/baalajimaestro/uupdumper
           git push origin master
+          jobs
+          kill %1
           # Exit and let the next build take over!
           exit 0
     else
