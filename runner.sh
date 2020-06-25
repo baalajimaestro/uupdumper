@@ -18,7 +18,13 @@ if [ "$RESULT" -eq 0 ]; then
     bash aria2_download_linux.sh
     RESULT2=$?
     if [ "$RESULT2" -eq 0 ]; then
-          scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r *.ISO baalaji20@storage.osdn.net:/storage/groups/b/ba/baalajimaestrobuilds/windows/$edition
+          FILE_NAME=$(ls | grep *.ISO)
+          FILE_NAME=$(echo $FILE_NAME | awk -F'.ISO' '{print $1}')
+          OLD_FILE_NAME=$FILE_NAME
+          FILE_NAME=$(echo $FILE_NAME | sed "s/$FILE_NAME/$FILE_NAME-$(date +"%m%d%y+%H%M")/g")
+          FILE_NAME="$FILE_NAME.ISO"
+          mv $OLD_FILE_NAME $FILE_NAME
+          scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r $FILE_NAME baalaji20@storage.osdn.net:/storage/groups/b/ba/baalajimaestrobuilds/windows/$edition
           cd ..
           rm -rf windows windows.zip
           git add .
