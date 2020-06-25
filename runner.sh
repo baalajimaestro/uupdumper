@@ -8,6 +8,7 @@ ssh_keys() {
   echo "SSH Keys Set!"
 }
 
+while true; do echo "Building Windows ISO....."; sleep 120; done &
 for edition in x64 x86 arm64; do
 echo "I am dumping $edition edition!"
 cd /app
@@ -18,6 +19,8 @@ if [ "$RESULT" -eq 0 ]; then
     cd windows
     bash aria2_download_linux.sh
     RESULT2=$?
+    jobs
+    kill %1
     if [ "$RESULT2" -eq 0 ]; then
           scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r *.ISO baalaji20@storage.osdn.net:/storage/groups/b/ba/baalajimaestrobuilds/windows/$edition
           cd ..
@@ -30,6 +33,8 @@ if [ "$RESULT" -eq 0 ]; then
           # Exit and let the next build take over!
           exit 0
     else
+        jobs
+        kill %1
         echo "Building Edition $edition has failed!"
     fi
 else
