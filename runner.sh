@@ -19,8 +19,8 @@ if [ "$RESULT" -eq 0 ]; then
     RESULT2=$?
     if [ "$RESULT2" -eq 0 ]; then
           FILE_NAME=$(ls | grep *.ISO)
-          FILE_NAME=$(echo $FILE_NAME | awk -F'.ISO' '{print $1}')
           OLD_FILE_NAME=$FILE_NAME
+          FILE_NAME=$(echo $FILE_NAME | awk -F'.ISO' '{print $1}')
           FILE_NAME=$(echo $FILE_NAME | sed "s/$FILE_NAME/$FILE_NAME-$(date +"%m%d%y+%H%M")/g")
           FILE_NAME="$FILE_NAME.ISO"
           mv $OLD_FILE_NAME $FILE_NAME
