@@ -12,7 +12,6 @@ curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.ssh/id_ed25519 https://r
 chmod 600 ~/.ssh/id_ed25519
 echo "SSH Keys Set!"
 
-while true; do echo "Building Windows ISO....."; sleep 120; done &
 for edition in x64 x86 arm64; do
 echo "I am dumping $edition edition!"
 cd /app
@@ -21,6 +20,7 @@ RESULT=$?
 if [ "$RESULT" -eq 0 ]; then
     mkdir windows && unzip windows.zip -d windows
     cd windows
+    while true; do echo "Building Windows ISO....."; sleep 120; done &
     bash aria2_download_linux.sh
     RESULT2=$?
     if [ "$RESULT2" -eq 0 ]; then
