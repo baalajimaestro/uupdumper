@@ -1,3 +1,11 @@
+#
+# Copyright © 2020 Maestro Creativescape
+#
+# SPDX-License-Identifier: GPL-3.0
+#
+# Python script to fetch the latest windows ISO of given architecture.
+# Pass architecture as command line argument
+
 import requests
 import urllib
 import requests, re

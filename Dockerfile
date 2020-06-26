@@ -1,3 +1,10 @@
+#
+# Copyright © 2020 Maestro Creativescape
+#
+# SPDX-License-Identifier: GPL-3.0
+#
+# Docker Image Builder for building the latest windows ISO
+
 FROM debian:bullseye-slim
 
 RUN apt update > /dev/null

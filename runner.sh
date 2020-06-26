@@ -1,4 +1,10 @@
 #! /usr/bin/env bash
+#
+# Copyright © 2020 Maestro Creativescape
+#
+# SPDX-License-Identifier: GPL-3.0
+#
+# Script to use uupdump.ml and build the latest windows ISO
 
 echo "**MaestroCI UUP Dumper**"
 mkdir -p /root/.ssh
