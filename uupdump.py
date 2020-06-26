@@ -17,31 +17,33 @@ if resp.status_code == 200:
     rows = table.find_all('tr')
     for row in rows:
         cols = row.find_all('td')
-        column=[]
-        for ele in cols:
-            if ele.find_all('a', attrs={'href': re.compile("^./")}):
-                link = ele.find('a', attrs={'href': re.compile("^./")})
-                column.append(link.get("href").split("./selectlang.php?id=")[1])
-            else:
-                column.append(ele.text.strip())
-        cols = column
+        cols = [ele.text.strip() for ele in cols]
         data.append([ele for ele in cols if ele])
     for i in data:
         if sys.argv[1] in i:
             with open("Extracted_Files.txt", "r+") as elist:
                 extracted = elist.readlines()
-                if i[0]+"\n" in extracted:
+                if i[2]+"\n" in extracted:
                     print("The latest update for "+sys.argv[1]+" has already been pushed to OSDN!")
                     exit(1)
                 URL = base_url+"get.php?"
-                URL += "id="+i[0]
+                URL += "id="+i[2]
                 URL += "&pack=en-us"
-                URL += "&edition=core;coren;professional;professionaln"
-                data = {"autodl":	"3",
-                        "updates":	"1",
-                        "virtualEditions[]": ["CoreSingleLanguage","ProfessionalWorkstation","ProfessionalEducation","Education","Enterprise","ServerRdsh","IoTEnterprise","ProfessionalWorkstationN","ProfessionalEducationN","EducationN","EnterpriseN"]
-                        }
+                if sys.argv[1] == "arm64":
+                    URL += "&edition=core;professional"
+                    data = {"autodl":	"3",
+                            "updates":	"1",
+                            "virtualEditions[]": ["CoreSingleLanguage","ProfessionalWorkstation","ProfessionalEducation","Education","Enterprise","ServerRdsh","IoTEnterprise"]
+                            }
+                else:
+                    URL += "&edition=core;coren;professional;professionaln"
+                    data = {"autodl":	"3",
+                            "updates":	"1",
+                            "virtualEditions[]": ["CoreSingleLanguage","ProfessionalWorkstation","ProfessionalEducation","Education","Enterprise","ServerRdsh","IoTEnterprise","ProfessionalWorkstationN","ProfessionalEducationN","EducationN","EnterpriseN"]
+                            }
+                print(URL, data)
+                break
                 resp = requests.post(URL, headers=headers, data=data)
                 open("windows.zip", "wb").write(resp.content)
-                elist.write(i[0]+"\n")
+                elist.write(i[2]+"\n")
                 break
