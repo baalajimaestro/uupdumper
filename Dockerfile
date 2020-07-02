@@ -28,7 +28,8 @@ RUN apt install git \
                 grep \
                 bash \
                 openssl \
-                ca-certificates -y > /dev/null
+                ca-certificates \
+                rclone -y > /dev/null
 
 RUN pip3 install requests bs4 urllib3 > /dev/null
 

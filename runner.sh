@@ -7,10 +7,8 @@
 # Script to use uupdump.ml and build the latest windows ISO
 
 echo "**MaestroCI UUP Dumper**"
-mkdir -p /root/.ssh
-curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.ssh/id_ed25519 https://raw.githubusercontent.com/baalajimaestro/keys/master/id_ed25519
-chmod 600 ~/.ssh/id_ed25519
-echo "SSH Keys Set!"
+curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.rclone.conf https://raw.githubusercontent.com/baalajimaestro/keys/master/rclone-onedrive.conf
+echo "**Pulled Rclone Config for OneDrive (Amrita)**"
 
 for edition in x64 x86 arm64; do
 echo "I am dumping $edition edition!"
@@ -30,7 +28,8 @@ if [ "$RESULT" -eq 0 ]; then
           FILE_NAME=$(echo $FILE_NAME | sed "s/$FILE_NAME/$FILE_NAME-$(date +"%m%d%y+%H%M")/g")
           FILE_NAME="$FILE_NAME.ISO"
           mv $OLD_FILE_NAME $FILE_NAME
-          scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r $FILE_NAME baalaji20@storage.osdn.net:/storage/groups/b/ba/baalajimaestrobuilds/windows/$edition
+          rclone copy $FILE_NAME onedrive-amrita:/Windows/$edition
+          echo '**I have pushed the file to https://amritavishwavidyapeetham-my.sharepoint.com/:f:/g/personal/cb_en_u4cse17613_cb_students_amrita_edu/EgisFNe7q_pHm2vhia3D5SgBmDMzC38b_CprVjC90qBSLg?e=Dvvtye**'
           cd ..
           rm -rf windows windows.zip
           git add .
