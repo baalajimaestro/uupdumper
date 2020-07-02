@@ -7,7 +7,8 @@
 # Script to use uupdump.ml and build the latest windows ISO
 
 echo "**MaestroCI UUP Dumper**"
-curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.rclone.conf https://raw.githubusercontent.com/baalajimaestro/keys/master/rclone-onedrive.conf
+rclone config file
+curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.config/rclone/rclone.conf https://raw.githubusercontent.com/baalajimaestro/keys/master/rclone-onedrive.conf
 echo "**Pulled Rclone Config for OneDrive (Amrita)**"
 
 for edition in x64 x86 arm64; do
