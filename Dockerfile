@@ -15,8 +15,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt install  git \
                                                 python3 \
                                                 moreutils \
                                                 apt-utils \
-                                                openssh-client \
-                                                openssh-server \
                                                 gawk \
                                                 curl \
                                                 wget \
