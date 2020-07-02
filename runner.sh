@@ -21,7 +21,7 @@ if [ "$RESULT" -eq 0 ]; then
     mkdir windows && unzip windows.zip -d windows
     cd windows
     while true; do echo "Building Windows ISO....."; sleep 120; done &
-    bash aria2_download_linux.sh
+    bash uup_download_linux.sh
     RESULT2=$?
     if [ "$RESULT2" -eq 0 ]; then
           FILE_NAME=$(ls | grep *.ISO)
