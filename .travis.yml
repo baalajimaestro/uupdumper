@@ -11,4 +11,4 @@ before_install:
   - docker build . -t ci
 
 script:
-  - docker run -e GH_PERSONAL_TOKEN="${GH_PERSONAL_TOKEN}" ci
+  - docker run -e GH_PERSONAL_TOKEN="${GH_PERSONAL_TOKEN}" $BUILD_ID=${BUILD_ID} ci

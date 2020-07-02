@@ -13,7 +13,11 @@ echo "**Pulled Rclone Config for OneDrive (Amrita)**"
 for edition in x64 x86 arm64; do
 echo "I am dumping $edition edition!"
 cd /app
-python3 uupdump.py $edition
+if [[ -n "$BUILD_ID" ]]; then
+    python uupdump.py $edition $BUILD_ID
+else
+    python3 uupdump.py $edition
+fi
 RESULT=$?
 if [ "$RESULT" -eq 0 ]; then
     mkdir windows && unzip windows.zip -d windows
