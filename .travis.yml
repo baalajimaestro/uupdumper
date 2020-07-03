@@ -22,5 +22,5 @@ jobs:
         - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" &> /dev/null
         - sudo apt install docker-ce docker-ce-cli containerd.io &> /dev/null
         - docker build -f Dockerfile . -t ci:latest
-        - docker run -e GH_PERSONAL_TOKEN="${GH_PERSONAL_TOKEN}" -e $BUILD_ID=${BUILD_ID} ci
+        - docker run -e GH_PERSONAL_TOKEN="${GH_PERSONAL_TOKEN}" -e BUILD_ID=${BUILD_ID} -e EDITION=${EDITION} ci
       name: "Run the Build"
