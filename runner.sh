@@ -31,6 +31,8 @@ if [[ -n "$BUILD_ID" ]]; then
             echo '**I have pushed the file to https://amritavishwavidyapeetham-my.sharepoint.com/:f:/g/personal/cb_en_u4cse17613_cb_students_amrita_edu/EgisFNe7q_pHm2vhia3D5SgBmDMzC38b_CprVjC90qBSLg?e=Dvvtye**'
         fi
     fi
+    jobs
+    kill %1
 else
     for edition in x64 x86 arm64; do
     echo "I am dumping $edition edition!"
