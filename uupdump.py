@@ -8,7 +8,7 @@
 
 import requests
 import urllib
-import requests, re
+import re
 import sys
 from bs4 import BeautifulSoup
 
