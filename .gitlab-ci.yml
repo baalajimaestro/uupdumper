@@ -1,0 +1,22 @@
+docker-build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker pull baalajimaestro/pixelexp-ci:latest
+  script:
+    - docker build . -t baalajimaestro/uup_dumper:latest
+    - docker push baalajimaestro/uup_dumper
+
+pull-uup-dump:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker pull baalajimaestro/uup_dumper:latest
+    - docker build . -t ci
+  script:
+    - docker run -e GITLAB_TOKEN="${GITLAB_TOKEN}" -e BUILD_ID=${BUILD_ID} -e EDITION=${EDITION} ci
