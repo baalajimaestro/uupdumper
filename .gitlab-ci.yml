@@ -5,9 +5,9 @@ docker-build:
     - docker:dind
   before_script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker pull baalajimaestro/pixelexp-ci:latest
+    - docker pull baalajimaestro/uup_dumper:latest
   script:
-    - docker build . -t baalajimaestro/uup_dumper:latest
+    - docker build -f Dockerfile.builder . -t baalajimaestro/uup_dumper:latest
     - docker push baalajimaestro/uup_dumper
 
 pull-uup-dump:

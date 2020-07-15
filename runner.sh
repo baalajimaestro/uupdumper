@@ -8,7 +8,7 @@
 
 echo "**MaestroCI UUP Dumper**"
 rclone config file
-curl -sL -u baalajimaestro:$GH_PERSONAL_TOKEN -o /root/.config/rclone/rclone.conf https://raw.githubusercontent.com/baalajimaestro/keys/master/rclone-onedrive.conf
+curl -sL -u baalajimaestro:$GITLAB_TOKEN -o /root/.config/rclone/rclone.conf https://gitlab.com/baalajimaestro/keys/-/raw/master/rclone-onedrive.conf
 echo "**Pulled Rclone Config for OneDrive (Amrita)**"
 
 if [[ -n "$BUILD_ID" ]]; then
