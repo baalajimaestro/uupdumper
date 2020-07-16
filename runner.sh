@@ -59,7 +59,7 @@ else
             git add .
             git commit -m "[MaestroCI]: UUP Dumped on $(date +"%m-%d-%y")" --signoff
             git remote rm origin
-            git remote add origin https://baalajimaestro:${GH_PERSONAL_TOKEN}@github.com/baalajimaestro/uupdumper
+            git remote add origin https://baalajimaestro:${GITLAB_TOKEN}@gitlab.com/baalajimaestro/uupdumper.git/
             git push origin master
             jobs
             kill %1
