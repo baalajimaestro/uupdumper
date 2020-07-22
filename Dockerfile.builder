@@ -22,6 +22,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt install  git \
                                                 grep \
                                                 bash \
                                                 openssl \
+                                                jq \
                                                 ca-certificates -y > /dev/null
 
 RUN curl https://rclone.org/install.sh | bash -s beta
