@@ -9,7 +9,7 @@
 echo "**MaestroCI UUP Dumper**"
 rclone config file
 resp="$(curl -sL --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "https://gitlab.com/api/v4/projects/19953649/repository/files/rclone-onedrive.conf?ref=master")"
-echo $(base64 -di <<< $(echo $resp | jq 'content')) > /root/.config/rclone/rclone.conf
+echo $(base64 -di <<< $(echo $resp | jq '.content')) > /root/.config/rclone/rclone.conf
 echo "**Pulled Rclone Config for OneDrive (Amrita)**"
 
 if [[ -n "$BUILD_ID" ]]; then
